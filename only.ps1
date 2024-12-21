@@ -88,6 +88,16 @@ function Install-Spicetify {
     Write-Host -Object 'Installing spicetify...'
   }
   process {
+    $targetVersion = 'latest'  # Set a default version or logic to get it elsewhere
+    $archivePath = [System.IO.Path]::Combine([System.IO.Path]::GetTempPath(), "spicetify.zip")
+    Write-Host -Object "Downloading spicetify v$targetVersion..." -NoNewline
+    $Parameters = @{
+      Uri            = "https://github.com/spicetify/cli/releases/download/v$targetVersion/spicetify-$targetVersion-windows-x64.zip"  # Use a default version, e.g., latest or replace this logic
+      UseBasicParsin = $true
+      OutFile        = $archivePath
+    }
+    Invoke-WebRequest @Parameters
+    Write-Success
     Write-Host -Object 'Extracting spicetify...' -NoNewline
     Expand-Archive -Path $archivePath -DestinationPath $spicetifyFolderPath -Force
     Write-Success
@@ -143,11 +153,11 @@ Write-Host -Object "`nRun" -NoNewline
 Write-Host -Object ' spicetify -h ' -NoNewline -ForegroundColor 'Cyan'
 Write-Host -Object 'to get started'
 #endregion Spicetify
-  Write-Host -Object 'Starting the spicetify Marketplace installation script..'
-  $Parameters = @{
-    Uri             = 'https://raw.githubusercontent.com/Teddy-com/Spicetify-Installer/refs/heads/main/spicify.ps1'
-    UseBasicParsing = $true
-  }
-  Invoke-WebRequest @Parameters | Invoke-Expression
-#endregion Marketplace
+
+Write-Host -Object 'Starting the spicetify Marketplace installation script..'
+$Parameters = @{
+  Uri             = 'https://raw.githubusercontent.com/spicetify/spicetify-marketplace/main/resources/install.ps1'
+  UseBasicParsing = $true
+}
+Invoke-WebRequest @Parameters | Invoke-Expression
 #endregion Main
