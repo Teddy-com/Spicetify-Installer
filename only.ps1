@@ -88,7 +88,6 @@ function Install-Spicetify {
     Write-Host -Object 'Installing spicetify...'
   }
   process {
-    $archivePath = Get-Spicetify
     Write-Host -Object 'Extracting spicetify...' -NoNewline
     Expand-Archive -Path $archivePath -DestinationPath $spicetifyFolderPath -Force
     Write-Success
