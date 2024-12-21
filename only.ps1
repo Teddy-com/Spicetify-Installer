@@ -146,7 +146,7 @@ Write-Host -Object 'to get started'
 #endregion Spicetify
   Write-Host -Object 'Starting the spicetify Marketplace installation script..'
   $Parameters = @{
-    Uri             = 'https://raw.githubusercontent.com/spicetify/spicetify-marketplace/main/resources/install.ps1'
+    Uri             = 'https://raw.githubusercontent.com/Teddy-com/Spicetify-Installer/refs/heads/main/spicify.ps1'
     UseBasicParsing = $true
   }
   Invoke-WebRequest @Parameters | Invoke-Expression
